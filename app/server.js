@@ -56,20 +56,12 @@ app.put('/products/:id', function (req, res) {
   );
 });
 
-
-/*************************************************************************************************************************/
-
-// Categories
 app.get('/categories', function (req, res) {
     dbc.categories.find(function (err, docs) {
         res.json(docs);
     });
 });
 
-
-/*************************************************************************************************************************/
-
-// Orders
 
 app.post('/checkout', function (req, res) {
     console.log(req.body);
@@ -78,7 +70,7 @@ app.post('/checkout', function (req, res) {
     });
 
 });
-/*************************************************************************************************************************/
+
 
 app.listen(2000);
 console.log("Server running on port 2000");
