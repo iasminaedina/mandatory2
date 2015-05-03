@@ -3,7 +3,8 @@
 	var productsService = function($http){
 
 		var categoriesSelected = [];
-		
+
+		//Get products from database
 		var getProducts = function(){
 			return $http.get("products")
 						.then(function(response){
@@ -11,13 +12,14 @@
 						})
 		};
 
+        //Get categories from database
         var getCategories = function(){
             return $http.get("categories")
                 .then(function(response){
                     return response.data;
                 })
         };
-
+        //Get product name from database
 		var getProduct = function(name){
 			return $http.get("products")
 						.then(function(response){
@@ -25,6 +27,7 @@
 						})
 		}
 		
+		//Search for product in array by name
 		var findProductInArray = function(data, name){
 			return data.filter(function(element){
 				if(element.name === name){
@@ -35,12 +38,13 @@
 
 
 
-
+        //Get category selected
         var getCategoriesSelected = function(){
 
             return categoriesSelected;
         }
 
+        //Category change
         var categoryChange = function(category){
 
                 var i = categoriesSelected.indexOf(category); // -1 for not checked
@@ -56,7 +60,8 @@
 
                 }
             };
-
+            
+       //Filter products by category selected
         var productFilter = function (product) {
 
             if(categoriesSelected.length > 0) {

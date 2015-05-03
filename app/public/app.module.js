@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-
+    
     angular
         .module('Main', [
         	'ngRoute',
@@ -10,11 +10,16 @@
             ]
         )
 
+        /*************************************************************************************************************************/
+        //Set rootScope for cart at run
+
         .run(function($rootScope){
             $rootScope.cartProducts = {};
             $rootScope.cartTotal = 0;
         })
 
+        /*************************************************************************************************************************/
+        //Configure routes
         .config(function($routeProvider){
         	$routeProvider
         		.when('/product/:name', {

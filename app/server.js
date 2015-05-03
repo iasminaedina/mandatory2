@@ -1,15 +1,21 @@
-
+//Initialize modules
 var express = require('express');
-var app = express();
 var mongojs = require('mongojs');
+var bodyParser = require('body-parser');
+
+//Mongo db connection
 var db = mongojs('products', ['products']);
 var dbc = mongojs('products', ['categories']);
 var dbo = mongojs('products', ['orders']);
-var bodyParser = require('body-parser');
 
+//Express setup
+var app = express();
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
+/*************************************************************************************************************************/
+
+//Products : Get,Post, delete product, edit product
 app.get('/products', function (req, res) {
     console.log('I received a GET request');
 
@@ -25,8 +31,6 @@ app.post('/products', function (req, res) {
         res.json(doc);
     });
 });
-
-
 
 app.delete('/products/:id', function (req, res) {
   var id = req.params.id;
@@ -56,12 +60,19 @@ app.put('/products/:id', function (req, res) {
   );
 });
 
+/*************************************************************************************************************************/
+
+// Categories
 app.get('/categories', function (req, res) {
     dbc.categories.find(function (err, docs) {
         res.json(docs);
     });
 });
 
+
+/*************************************************************************************************************************/
+
+// Orders
 
 app.post('/checkout', function (req, res) {
     console.log(req.body);
@@ -71,6 +82,8 @@ app.post('/checkout', function (req, res) {
 
 });
 
+/*************************************************************************************************************************/
 
+//Server
 app.listen(2000);
 console.log("Server running on port 2000");

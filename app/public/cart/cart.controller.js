@@ -7,19 +7,22 @@
 
     function cartController($http, $scope, $rootScope, cartService) {
 
+        //Delete Product in cart
         $scope.deleteProductFromCart = function(product){
             cartService.deleteProductFromCart(product);
         }
 
+        //Add quantity of product in cart
         $scope.addToQuantity = function(product){
             cartService.addToQuantity(product);
         }
 
+        //Substract quantity of product in cart
         $scope.deleteFromQuantity = function(product){
             cartService.deleteFromQuantity(product);
         }
 
-
+        //get personal details of user
         $scope.order = function(cartProducts){
             var userInfo = {};
             var u = $scope.user;
@@ -32,6 +35,7 @@
             userInfo["phone"] = u.phone;
             userInfo["email"] = u.email;
 
+            //Console log the order and save to database
             console.log(order);
             $http.post('/checkout', order).success(function() {
                 window.location= '#/';
